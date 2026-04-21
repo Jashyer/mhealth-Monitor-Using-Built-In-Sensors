@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F9F9"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mHealth"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#1A1A1A"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardHero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvHeader">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <com.example.mhealth.HeartWaveView
+                android:id="@+id/heartWaveView"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cameraContainer"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/progressRing"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cameraContainer"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="60dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#000000"
+                app:layout_constraintStart_toStartOf="@id/progressRing"
+                app:layout_constraintEnd_toEndOf="@id/progressRing"
+                app:layout_constraintTop_toTopOf="@id/progressRing"
+                app:layout_constraintBottom_toBottomOf="@id/progressRing">
+
+                <androidx.camera.view.PreviewView
+                    android:id="@+id/textureViewCamera"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <com.example.mhealth.WaterHeartView
+                android:id="@+id/waterHeartView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="@id/cameraContainer"
+                app:layout_constraintEnd_toEndOf="@id/cameraContainer"
+                app:layout_constraintTop_toTopOf="@id/cameraContainer"
+                app:layout_constraintBottom_toBottomOf="@id/cameraContainer"/>
+
+            <ImageView
+                android:id="@+id/iconHeart"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/logo_final"
+                app:tint="#E57373"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/heartWaveView"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvBpmValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-- BPM"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@id/iconHeart"
+                app:layout_constraintBottom_toBottomOf="@id/iconHeart"
+                app:layout_constraintStart_toEndOf="@id/iconHeart"/>
+
+            <TextView
+                android:id="@+id/btnMeasureHero"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="Measure BPM"
+                android:gravity="center"
+                android:textColor="#004D40"
+                android:textStyle="bold"
+                android:background="@drawable/bg_button_outline"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/iconHeart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/cardHero">
+
+        <include layout="@layout/item_card_small"
+            android:id="@+id/cardSpo2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"/>
+
+        <include layout="@layout/item_card_small"
+            android:id="@+id/cardSteps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/row1">
+
+        <include layout="@layout/item_card_small"
+             android:id="@+id/cardFallDetection"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:layout_marginEnd="8dp"/>
+
+        <include layout="@layout/item_card_small"
+             android:id="@+id/cardActivity"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/row2">
+
+        <include
+            layout="@layout/item_card_small"
+            android:id="@+id/cardStress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <include
+        layout="@layout/layout_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
